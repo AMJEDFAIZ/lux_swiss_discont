@@ -1,0 +1,15 @@
+{
+  "name": "Lux Swiss",
+  "short_name": "LuxSwiss",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#466f24",
+  "icons": [
+    {
+      "src": "assets/img/logo-copy.jpg",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

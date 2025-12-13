@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>متجر المنتجات المميزة</title>
+    <style>
+        /* تنسيقات أساسية */
+        :root { --primary-color: #25D366; /* لون واتساب */ --text-color: #333; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 0; background-color: #f4f4f4; }
+        
+        /* تنسيق العنوان */
+        header { background: white; padding: 20px; text-align: center; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        h1 { margin: 0; color: var(--text-color); }
+
+        /* شبكة المنتجات */
+        .products-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            padding: 40px;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        /* كرت المنتج */
+        .product-card {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+        .product-card:hover { transform: translateY(-5px); }
+        .product-img  { width: 100%; height: 300px; object-fit: cover; background: #ddd; border-radius: 8px; margin-bottom: 15px; }
+        .product-img img { width: 100%; height: 100%; object-fit: cover; background: #ddd; border-radius: 8px; margin-bottom: 15px; }
+        .price { color: #d32f2f; font-weight: bold; font-size: 1.2em; }
+        
+        /* زر الطلب */
+        .btn-order {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 1em;
+            margin-top: 10px;
+        }
+
+        /* النافذة المنبثقة (Modal) */
+        .modal {
+            display: none; /* مخفي افتراضياً */
+            position: fixed;
+            z-index: 1000;
+            left: 0; top: 0;
+            width: 100%; height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            justify-content: center;
+            align-items: center;
+        }
+        .modal-content {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 400px;
+            position: relative;
+        }
+        .close-btn { position: absolute; left: 15px; top: 10px; cursor: pointer; font-size: 20px; }
+        
+        /* حقول النموذج */
+        input, select { width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ddd; border-radius: 5px; box-sizing: border-box;}
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>أحدث العروض الحصرية</h1>
+</header>
+
+<div class="products-container">
+    <div class="product-card">
+                <div class="product-img"><img src="assets/img/logo.jpg" alt="">  </div>
+
+         <h3>ساعة ذكية ألترا</h3>
+        <p class="price">150 ريال</p>
+        <button class="btn-order" onclick="openModal('ساعة ذكية ألترا', 150)">اطلب الآن - دفع عند الاستلام</button>
+    </div>
+
+    <div class="product-card">
+        <div class="product-img"><img src="assets/img/logo.jpg" alt="">  </div>
+        <h3>سماعة بلوتوث برو</h3>
+        <p class="price">99 ريال</p>
+        <button class="btn-order" onclick="openModal('سماعة بلوتوث برو', 99)">اطلب الآن - دفع عند الاستلام</button>
+    </div>
+    
+    <div class="product-card">
+              <div class="product-img"><img src="assets/img/logo.jpg" alt="">  </div>
+
+        <h3>حقيبة ظهر ضد السرقة</h3>
+        <p class="price">120 ريال</p>
+        <button class="btn-order" onclick="openModal('حقيبة ظهر ضد السرقة', 120)">اطلب الآن - دفع عند الاستلام</button>
+    </div>
+</div>
+
+<div id="orderModal" class="modal">
+    <div class="modal-content">
+        <span class="close-btn" onclick="closeModal()">&times;</span>
+        <h2 style="text-align: center;">إتمام الطلب</h2>
+        <p style="text-align: center; color: #666;">المنتج: <span id="selectedProduct" style="font-weight: bold;"></span></p>
+        <p style="text-align: center; color: #666;">السعر: <span id="hiddenPrice" style="font-weight: bold;"></span></p>
+        
+        <form id="orderForm" onsubmit="submitOrder(event)">
+            <input type="text" id="customerName" placeholder="الاسم الكامل" required>
+            <input type="tel" id="customerPhone" placeholder="رقم الهاتف" required>
+            <input type="text" id="customerAddress" placeholder="العنوان (المدينة - الحي)" required>
+            <input type="hidden" id="hiddenProduct">
+            <input type="hidden" id="hiddenPrice">
+            
+            <button type="submit" class="btn-order">تأكيد الطلب وإرسال للواتساب</button>
+        </form>
+    </div>
+</div>
+
+<script>
+   // رابط السكربت الخاص بك (ضعه هنا بدلاً من النص الموجود بالأسفل)
+    const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzw1VfVakNAaj3TUTFmpYI81rjrW1JXzIP1ehT02YZF7wqchZCcDzl-3RTLfC4fVeLJ/exec";
+    const dlivr = 1000;
+    // 1. دالة فتح النافذة
+    function openModal(productName, price) {
+        document.getElementById('orderModal').style.display = 'flex';
+        document.getElementById('selectedProduct').innerText = productName;
+        document.getElementById('hiddenPrice').innerText = price + dlivr ;
+        document.getElementById('hiddenProduct').value = productName;
+        document.getElementById('hiddenPrice').value = price;
+    }
+
+    // 2. دالة إغلاق النافذة
+    function closeModal() {
+        document.getElementById('orderModal').style.display = 'none';
+    }
+
+    // 3. دالة معالجة الطلب (المعدلة)
+    function submitOrder(e) {
+        e.preventDefault(); // منع تحديث الصفحة
+
+        // تغيير نص الزر ليظهر للمستخدم أن هناك عملية جارية
+        const submitBtn = document.querySelector('.btn-order[type="submit"]');
+        const originalBtnText = submitBtn.innerText;
+        submitBtn.innerText = "جاري المعالجة...";
+        submitBtn.disabled = true;
+
+        // جمع البيانات من الحقول
+        const data = {
+            name: document.getElementById('customerName').value,
+            phone: document.getElementById('customerPhone').value,
+            address: document.getElementById('customerAddress').value,
+            product: document.getElementById('hiddenProduct').value ,
+            price: document.getElementById('hiddenPrice').value+dlivr
+        };
+
+        // إرسال البيانات إلى Google Sheet
+        fetch(GOOGLE_SCRIPT_URL, {
+            method: 'POST',
+            mode: 'no-cors', // ضروري جداً لتجنب مشاكل الأمان مع جوجل
+            cache: 'no-cache',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data) // تحويل البيانات لنص
+        })
+        .then(() => {
+            // بعد نجاح الإرسال للشيت، نجهز رابط الواتساب
+            // رقمك الواتساب (عدله برقمك)
+            const myPhone = "967775226109"; 
+            
+            const message = `مرحباً، أريد طلب منتج جديد:%0a` +
+                            `📦 المنتج: ${data.product}%0a` +
+                            `💰 السعر: ${data.price} ريال%0a` +
+                            `------------------%0a` +
+                            `👤 الاسم: ${data.name}%0a` +
+                            `📱 الجوال: ${data.phone}%0a` +
+                            `📍 العنوان: ${data.address}%0a` +
+                            `💵 الدفع: عند الاستلام`;
+
+            const whatsappURL = `https://wa.me/${myPhone}?text=${message}`;
+
+            // إعادة الزر لحالته الطبيعية وإغلاق النافذة
+            submitBtn.innerText = originalBtnText;
+            submitBtn.disabled = false;
+            closeModal();
+            
+            // مسح الحقول
+            document.getElementById('orderForm').reset();
+
+            // فتح الواتساب في نافذة جديدة
+            window.open(whatsappURL, '_blank');
+            
+            alert("تم استلام طلبك وسيتم تحويلك لواتساب لتأكيد الموقع!");
+        })
+        .catch(err => {
+            console.error('Error:', err);
+            alert("حدث خطأ بسيط، سيتم تحويلك للواتساب مباشرة.");
+            // حتى لو فشل الحفظ في الشيت، نفتح الواتساب كي لا تخسر العميل
+            window.open(`https://wa.me/967775226109`, '_blank');
+            submitBtn.innerText = originalBtnText;
+            submitBtn.disabled = false;
+        });
+    }
+
+    // إغلاق النافذة عند الضغط خارجها
+    window.onclick = function(event) {
+        if (event.target == document.getElementById('orderModal')) {
+            closeModal();
+        }
+    }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,359 @@
+
+:root {
+	--green-1: #467024;
+	--green-2: #253b0d;
+	--white: #ffffff;
+	--muted: #8b8b8b;
+	--peach: #f7dcc9; /* لون بطاقات الروابط الفاتح يشبه الـ mock */
+	--card-radius: 18px;
+	--transition: 300ms cubic-bezier(0.2, 0.9, 0.3, 1);
+    --alqabs-bold:"alqabs-bold";
+    --alqabs-light:"alqabs-light";
+}
+
+@font-face {
+    font-family: "alqabs-bold";
+    src: url(../fonts/ArbFONTS-19305-alqabas-bold.ttf)format("truetype");
+    
+}
+@font-face {
+  font-family: "alqabs-light";
+    src: url(../fonts/ArbFONTS-19306-alqabas-light.ttf)format("truetype");
+}
+
+/* Global reset */
+* {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+html,
+body {
+	height: 100%;
+	background: var(--white);
+	font-family:"alqabs-light",  system-ui, sans-serif;
+	color: var(--green-2);
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+/* phone-like frame (centers and limits width like mobile screenshot) */
+.device {
+	min-height: 100vh;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 20px;
+}
+.card {
+	width: 380px; /* adjust to mimic phone screenshot */
+	border-radius: 28px;
+	overflow: hidden;
+	background: transparent;
+	box-shadow: 0 18px 60px rgba(0, 0, 0, 0.35);
+}
+
+/* ---------------- HERO (dark header) ---------------- */
+.hero {
+	background: linear-gradient(
+		180deg,
+		rgba(37, 59, 13, 0.95),
+		rgba(37, 59, 13, 0.9)
+	);
+	position: relative;
+	height: 300px;
+	display: flex;
+	align-items: flex-start;
+	justify-content: center;
+	padding-top: 18px;
+	padding-left: 18px;
+	padding-right: 18px;
+    overflow: hidden;
+}
+
+/* optional background image overlay (keep dark) */
+.hero::before {
+	content: "";
+	position: absolute;
+	inset: 0;
+	background-image: url("../img/logo-copy.jpg"); /* optional */
+	background-size: cover;
+	background-position: center;
+	opacity: 0.12;
+	filter: blur(2px) saturate(0.85);
+    z-index: 3;
+}
+
+/* top small icons */
+.hero-top-icons {
+	position: absolute;
+	top: 12px;
+	left: 16px;
+	right: 16px;
+	display: flex;
+	justify-content: space-between;
+	z-index: 4;
+}
+.icon-btn {
+	background: transparent;
+	color: var(--white);
+	border: 1px solid rgba(255, 255, 255, 0.06);
+	padding: 8px 10px;
+	border-radius: 10px;
+	cursor: pointer;
+	font-size: 14px;
+	transition: transform var(--transition), background var(--transition);
+}
+.icon-btn:hover {
+	transform: translateY(-4px);
+	background: rgba(255, 255, 255, 0.02);
+}
+
+/* profile wrap (overlapping) */
+.profile-wrap {
+	position: relative;
+	text-align: center;
+	z-index: 6;
+	margin-top: 50px;
+}
+
+/* white ring + shadow behind profile image */
+.profile-ring {
+	position: absolute;
+	left: 50%;
+	transform: translateX(-50%);
+	top: -38px;
+	width: 116px;
+	height: 116px;
+	border-radius: 50%;
+	background: #ffffff;
+	box-shadow: 0 16px 36px rgba(0, 0, 0, 0.35);
+	z-index: 5;
+}
+
+/* profile image */
+.profile-img {
+	position: relative;
+	width: 100px;
+	height: 100px;
+	border-radius: 50%;
+	object-fit: cover;
+	margin: 0 auto;
+	z-index: 9;
+	margin-top: -40px;
+	/* border:6px solid var(--green-2); */
+	/* box-shadow: 0 10px 28px rgba(0,0,0,0.35); */
+	transition: transform var(--transition);
+}
+.profile-img:hover {
+	transform: translateY(-4px) scale(1.02);
+}
+
+/* name & handle */
+.brand-name {
+	font-family: "alqabs-light";
+	color: var(--white);
+	font-size: 22px;
+	margin-top: 20px;
+	letter-spacing: 0.6px;
+	text-shadow: 0 6px 18px rgba(0, 0, 0, 0.45);
+}
+.handle {
+	margin-top: 2px;
+    font-family: "alqabs-light";
+	color: var(--white); 
+	font-weight: 800;
+}
+
+/* social icons row inside hero */
+.social-row {
+	margin-top: 14px;
+	display: flex;
+	gap: 12px;
+	justify-content: center;
+	align-items: center;
+	z-index: 10;
+}
+.social-row a {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 36px;
+	height: 36px;
+	border-radius: 8px;
+	background: rgba(255, 255, 255, 0.04);
+	color: var(--white);
+	text-decoration: none;
+	font-size: 16px;
+	transition: transform var(--transition), background var(--transition);
+	border: 1px solid rgba(255, 255, 255, 0.04);
+}
+.social-row a:hover {
+	transform: translateY(-6px);
+	background: rgba(255, 255, 255, 0.1);
+	color: var(--green-1);
+}
+
+/* ---------------- Content (white card) ---------------- */
+.content {
+	background: var(--white);
+	border-top-left-radius: 26px;
+	border-top-right-radius: 26px;
+	padding: 22px;
+	margin-top: -36px; /* pull up to overlap hero */
+	z-index: 8;
+}
+
+/* section headings */
+.about-section h2,
+.links-section h3 {
+    font-family: "alqabs-light";
+	font-size: 18px;
+    font-weight: 800;
+	letter-spacing: 3px;
+	text-align: center;
+	color: var(--green-2);
+	margin-bottom: 10px;
+}
+
+/* about box (dotted border like reference) */
+.about-box {
+    text-align: center;
+	background: #fff;
+	border-radius: 14px;
+	padding: 14px;
+	border: 2px dotted rgba(70, 112, 36, 0.25);
+	box-shadow: 0 10px 24px rgba(17, 17, 17, 0.06);
+	color: #444;
+	font-size: 14px;
+    font-weight: 700;
+	line-height: 1.45;
+}
+
+/* links section - list of cards */
+.links-section {
+	margin-top: 18px;
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+}
+
+/* single link item */
+.link-item {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 12px;
+	text-decoration: none;
+	background: linear-gradient(
+		180deg,
+		rgba(247, 220, 210, 0.95),
+		rgba(247, 220, 210, 0.9)
+	);
+	padding: 12px 12px;
+	border-radius: 12px;
+	box-shadow: 0 8px 22px rgba(0, 0, 0, 0.08);
+	color: var(--green-2);
+	transition: transform var(--transition), box-shadow var(--transition);
+	border: 1px solid rgba(0, 0, 0, 0.02);
+}
+.link-item:hover {
+	transform: translateY(-6px);
+	box-shadow: 0 22px 48px rgba(0, 0, 0, 0.18);
+}
+
+/* left side inside link */
+.link-left {
+	display: flex;
+	gap: 12px;
+	align-items: center;
+}
+
+/* badge (icon circle) */
+.link-badge {
+	width: 46px;
+	height: 46px;
+	border-radius: 10px;
+	background: rgba(37, 59, 13, 0.12);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: var(--green-2);
+	font-size: 20px;
+	box-shadow: 0 8px 16px rgba(0, 0, 0, 0.06);
+	transition: background var(--transition), transform var(--transition);
+}
+.link-item:hover .link-badge {
+	background: var(--peach);
+	transform: scale(1.04);
+}
+
+/* text */
+.link-texts {
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
+}
+.link-title {
+	font-weight: 600;
+	color: var(--green-2);
+	font-size: 15px;
+}
+.link-sub {
+	font-size: 12px;
+	color: var(--muted);
+}
+
+/* right action icon */
+.link-action {
+	color: var(--green-2);
+	font-size: 16px;
+	opacity: 0.9;
+}
+
+/* preview card */
+.preview-section {
+	margin-top: 18px;
+}
+.preview-card {
+	border-radius: 12px;
+	overflow: hidden;
+	box-shadow: 0 14px 36px rgba(0, 0, 0, 0.08);
+	border: 1px solid rgba(0, 0, 0, 0.03);
+	background: #fff;
+}
+.preview-card img {
+	width: 100%;
+	height: auto;
+	display: block;
+}
+.preview-text {
+	padding: 10px;
+}
+.preview-title {
+	font-weight: 700;
+	color: var(--green-2);
+	font-size: 14px;
+}
+.preview-sub {
+	font-size: 12px;
+	color: var(--muted);
+	margin-top: 6px;
+}
+
+/* responsive adjustments */
+@media (max-width: 420px) {
+	.card {
+		width: 340px;
+	}
+	.profile-img {
+		width: 92px;
+		height: 92px;
+		margin-top: -44px;
+	}
+	.profile-ring {
+		width: 106px;
+		height: 106px;
+		top: -52px;
+	}
+}
