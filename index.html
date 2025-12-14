@@ -1,223 +1,178 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>متجر المنتجات المميزة</title>
-    <style>
-        /* تنسيقات أساسية */
-        :root { --primary-color: #25D366; /* لون واتساب */ --text-color: #333; }
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 0; background-color: #f4f4f4; }
-        
-        /* تنسيق العنوان */
-        header { background: white; padding: 20px; text-align: center; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
-        h1 { margin: 0; color: var(--text-color); }
-
-        /* شبكة المنتجات */
-        .products-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            padding: 40px;
-            max-width: 1200px;
-            margin: auto;
-        }
-
-        /* كرت المنتج */
-        .product-card {
-            background: white;
-            border-radius: 10px;
-            padding: 20px;
-            text-align: center;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            transition: transform 0.3s;
-        }
-        .product-card:hover { transform: translateY(-5px); }
-        .product-img  { width: 100%; height: 300px; object-fit: cover; background: #ddd; border-radius: 8px; margin-bottom: 15px; }
-        .product-img img { width: 100%; height: 100%; object-fit: cover; background: #ddd; border-radius: 8px; margin-bottom: 15px; }
-        .price { color: #d32f2f; font-weight: bold; font-size: 1.2em; }
-        
-        /* زر الطلب */
-        .btn-order {
-            background-color: var(--primary-color);
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-            width: 100%;
-            font-size: 1em;
-            margin-top: 10px;
-        }
-
-        /* النافذة المنبثقة (Modal) */
-        .modal {
-            display: none; /* مخفي افتراضياً */
-            position: fixed;
-            z-index: 1000;
-            left: 0; top: 0;
-            width: 100%; height: 100%;
-            background-color: rgba(0,0,0,0.5);
-            justify-content: center;
-            align-items: center;
-        }
-        .modal-content {
-            background-color: white;
-            padding: 30px;
-            border-radius: 10px;
-            width: 90%;
-            max-width: 400px;
-            position: relative;
-        }
-        .close-btn { position: absolute; left: 15px; top: 10px; cursor: pointer; font-size: 20px; }
-        
-        /* حقول النموذج */
-        input, select { width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ddd; border-radius: 5px; box-sizing: border-box;}
-    </style>
+    <title>متجر لوكس سويس لأفخم الساعات </title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
 </head>
+
 <body>
 
-<header>
-    <h1>أحدث العروض الحصرية</h1>
-</header>
+    <header class="hero-section">
+        <div class="hero-content">
+            <div class="logo-area">
+                <img src="assets/img/logo.jpg" class="logo-img" alt="">
+                <!-- <i class="fa-solid fa-bag-shopping logo-icon"></i> -->
+                <h1 class="brand-name">متجر لوكس سويس لأفخم الساعات</h1>
+            </div>
+            <h2 class="hero-title"> عروض الموسم الحصرية </h2>
+            <!-- <p class="hero-subtitle">أفضل المنتجات التقنية بأسعار لا تقبل المنافسة</p> -->
+        </div>
 
-<div class="products-container">
-    <div class="product-card">
-                <div class="product-img"><img src="assets/img/logo.jpg" alt="">  </div>
+        <div class="ticker-wrap">
+            <div class="ticker">
+                <div class="ticker-item">
+                    <i class="fa-duotone fa-solid fa-percent logo-icon"></i>
+                    تخفيضات كبرى لفترة محدودة
+                    <i class="fa-duotone fa-solid fa-percent logo-icon"></i>
+                </div>
+                <div class="ticker-item">
+                    <i class="fa-duotone fa-solid fa-truck logo-icon"></i>
+                    توصيل سريع داخل صنعاء
+                    <i class="fa-solid fa-truck fa-flip-horizontal logo-icon"></i>
+                </div>
+                <div class="ticker-item">
+                    <i class="fa-regular fa-gem logo-icon"></i>
+                    ضمان الجودة على جميع المنتجات
+                    <i class="fa-regular fa-gem logo-icon"></i>
+                </div>
 
-         <h3>ساعة ذكية ألترا</h3>
-        <p class="price">150 ريال</p>
-        <button class="btn-order" onclick="openModal('ساعة ذكية ألترا', 150)">اطلب الآن - دفع عند الاستلام</button>
+                <div class="ticker-item"><i class="fa-duotone fa-solid fa-percent logo-icon"></i>
+                    تخفيضات كبرى لفترة محدودة
+                    <i class="fa-duotone fa-solid fa-percent logo-icon"></i>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="section-title">
+            <h3>أحدث المنتجات</h3>
+            <div class="line"></div>
+        </div>
+        <div class="products-grid" id="productsWrapper">
+        </div>
     </div>
 
-    <div class="product-card">
-        <div class="product-img"><img src="assets/img/logo.jpg" alt="">  </div>
-        <h3>سماعة بلوتوث برو</h3>
-        <p class="price">99 ريال</p>
-        <button class="btn-order" onclick="openModal('سماعة بلوتوث برو', 99)">اطلب الآن - دفع عند الاستلام</button>
+    <div id="orderModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal()"><i class="fa-solid fa-xmark"></i></span>
+
+            <div class="modal-header">
+                <h3>إتمام الطلب</h3>
+                <p>أنت على بعد خطوة واحدة من الحصول على المنتج!</p>
+            </div>
+
+            <div class="product-summary-mini">
+                <img id="modalImg" src="" alt="Product">
+                <div class="mini-details">
+                    <p id="modalProdName"></p>
+                    <span id="modalProdID"></span>
+                </div>
+            </div>
+
+            <form id="orderForm" onsubmit="submitOrder(event)">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label><i class="fa-regular fa-user"></i> الاسم الكامل</label>
+                        <input type="text" id="name" required placeholder="مثال: محمد أحمد">
+                    </div>
+
+                    <div class="form-group">
+                        <label><i class="fa-solid fa-mobile-screen"></i> رقم الهاتف</label>
+                        <input type="tel" id="phone" required placeholder="967xxxxxxxxx">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label><i class="fa-solid fa-location-dot"></i> مكان التوصيل</label>
+                    <div class="shipping-options">
+                        <div class="shipping-option active" onclick="setShipping('inside')" id="optInside">
+                            <i class="fa-solid fa-city"></i> داخل صنعاء
+                        </div>
+                        <div class="shipping-option" onclick="setShipping('outside')" id="optOutside">
+                            <i class="fa-solid fa-truck-fast"></i> خارج صنعاء
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group" id="addressGroup">
+                    <label id="addressLabel"><i class="fa-regular fa-map"></i> العنوان بالتفصيل</label>
+                    <textarea id="address" rows="2" required placeholder="الشارع، المعلم القريب..."></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label><i class="fa-regular fa-note-sticky"></i> ملاحظات إضافية</label>
+                    <textarea id="notes" rows="1" placeholder="وقت مفضل للتوصيل..."></textarea>
+                </div>
+
+                <div class="summary-box">
+                    <div class="summary-row">
+                        <span>سعر المنتج</span>
+                        <span id="summaryPrice" class="num">0</span>
+                    </div>
+                    <div class="summary-row" id="shippingRow">
+                        <span>رسوم التوصيل</span>
+                        <span id="summaryShip" class="num">0</span>
+                    </div>
+                    <div class="total-divider"></div>
+                    <div class="summary-row total-row">
+                        <span>الإجمالي للدفع</span>
+                        <span id="summaryTotal" class="num">0</span>
+                    </div>
+                    <p id="paymentNote" class="payment-note">
+                        <i class="fa-solid fa-circle-check"></i> الدفع عند الاستلام متاح
+                    </p>
+                </div>
+
+                <input type="hidden" id="h_prodId">
+                <input type="hidden" id="h_prodName">
+                <input type="hidden" id="h_price">
+                <input type="hidden" id="h_imgUrl">
+
+                <button type="submit" class="btn-order submit-btn">
+                    <i class="fa-brands fa-whatsapp"></i> تأكيد الطلب
+                </button>
+                <p class="payment-note" style="color: #d32f2f;">
+                    <i class="fa-solid fa-circle-info" style="color: #d32f2f;"></i> عند تأكيد الطلب سيتم نقلك الى
+                    الواتساب
+                </p>
+            </form>
+        </div>
     </div>
-    
-    <div class="product-card">
-              <div class="product-img"><img src="assets/img/logo.jpg" alt="">  </div>
+    <a href="https://wa.me/967775226109" target="_blank" class="whatsapp-float">
+        <i class="fa-brands fa-whatsapp"></i>
+    </a>
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <!-- <i class="fa-solid fa-bag-shopping logo-icon"></i> -->
+                    <h3 class="brand-name"> متجر لوكس سويس لأفخم الساعات</h3>
+                    <p class="slogan">اختيارك الأول للجودة والتميز.</p>
+                </div>
 
-        <h3>حقيبة ظهر ضد السرقة</h3>
-        <p class="price">120 ريال</p>
-        <button class="btn-order" onclick="openModal('حقيبة ظهر ضد السرقة', 120)">اطلب الآن - دفع عند الاستلام</button>
-    </div>
-</div>
+                <div class="social-links">
+                    <a href="#" target="_blank" class="social-icon whatsapp-icon"><i
+                            class="fa-brands fa-whatsapp"></i></a>
+                    <a href="#" target="_blank" class="social-icon facebook-icon"><i
+                            class="fa-brands fa-facebook-f"></i></a>
+                    <a href="#" target="_blank" class="social-icon instagram-icon"><i
+                            class="fa-brands fa-instagram"></i></a>
+                </div>
+            </div>
 
-<div id="orderModal" class="modal">
-    <div class="modal-content">
-        <span class="close-btn" onclick="closeModal()">&times;</span>
-        <h2 style="text-align: center;">إتمام الطلب</h2>
-        <p style="text-align: center; color: #666;">المنتج: <span id="selectedProduct" style="font-weight: bold;"></span></p>
-        <p style="text-align: center; color: #666;">السعر: <span id="hiddenPrice" style="font-weight: bold;"></span></p>
-        
-        <form id="orderForm" onsubmit="submitOrder(event)">
-            <input type="text" id="customerName" placeholder="الاسم الكامل" required>
-            <input type="tel" id="customerPhone" placeholder="رقم الهاتف" required>
-            <input type="text" id="customerAddress" placeholder="العنوان (المدينة - الحي)" required>
-            <input type="hidden" id="hiddenProduct">
-            <input type="hidden" id="hiddenPrice">
-            
-            <button type="submit" class="btn-order">تأكيد الطلب وإرسال للواتساب</button>
-        </form>
-    </div>
-</div>
-
-<script>
-   // رابط السكربت الخاص بك (ضعه هنا بدلاً من النص الموجود بالأسفل)
-    const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzw1VfVakNAaj3TUTFmpYI81rjrW1JXzIP1ehT02YZF7wqchZCcDzl-3RTLfC4fVeLJ/exec";
-    const dlivr = 1000;
-    // 1. دالة فتح النافذة
-    function openModal(productName, price) {
-        document.getElementById('orderModal').style.display = 'flex';
-        document.getElementById('selectedProduct').innerText = productName;
-        document.getElementById('hiddenPrice').innerText = price + dlivr ;
-        document.getElementById('hiddenProduct').value = productName;
-        document.getElementById('hiddenPrice').value = price;
-    }
-
-    // 2. دالة إغلاق النافذة
-    function closeModal() {
-        document.getElementById('orderModal').style.display = 'none';
-    }
-
-    // 3. دالة معالجة الطلب (المعدلة)
-    function submitOrder(e) {
-        e.preventDefault(); // منع تحديث الصفحة
-
-        // تغيير نص الزر ليظهر للمستخدم أن هناك عملية جارية
-        const submitBtn = document.querySelector('.btn-order[type="submit"]');
-        const originalBtnText = submitBtn.innerText;
-        submitBtn.innerText = "جاري المعالجة...";
-        submitBtn.disabled = true;
-
-        // جمع البيانات من الحقول
-        const data = {
-            name: document.getElementById('customerName').value,
-            phone: document.getElementById('customerPhone').value,
-            address: document.getElementById('customerAddress').value,
-            product: document.getElementById('hiddenProduct').value ,
-            price: document.getElementById('hiddenPrice').value+dlivr
-        };
-
-        // إرسال البيانات إلى Google Sheet
-        fetch(GOOGLE_SCRIPT_URL, {
-            method: 'POST',
-            mode: 'no-cors', // ضروري جداً لتجنب مشاكل الأمان مع جوجل
-            cache: 'no-cache',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(data) // تحويل البيانات لنص
-        })
-        .then(() => {
-            // بعد نجاح الإرسال للشيت، نجهز رابط الواتساب
-            // رقمك الواتساب (عدله برقمك)
-            const myPhone = "967775226109"; 
-            
-            const message = `مرحباً، أريد طلب منتج جديد:%0a` +
-                            `📦 المنتج: ${data.product}%0a` +
-                            `💰 السعر: ${data.price} ريال%0a` +
-                            `------------------%0a` +
-                            `👤 الاسم: ${data.name}%0a` +
-                            `📱 الجوال: ${data.phone}%0a` +
-                            `📍 العنوان: ${data.address}%0a` +
-                            `💵 الدفع: عند الاستلام`;
-
-            const whatsappURL = `https://wa.me/${myPhone}?text=${message}`;
-
-            // إعادة الزر لحالته الطبيعية وإغلاق النافذة
-            submitBtn.innerText = originalBtnText;
-            submitBtn.disabled = false;
-            closeModal();
-            
-            // مسح الحقول
-            document.getElementById('orderForm').reset();
-
-            // فتح الواتساب في نافذة جديدة
-            window.open(whatsappURL, '_blank');
-            
-            alert("تم استلام طلبك وسيتم تحويلك لواتساب لتأكيد الموقع!");
-        })
-        .catch(err => {
-            console.error('Error:', err);
-            alert("حدث خطأ بسيط، سيتم تحويلك للواتساب مباشرة.");
-            // حتى لو فشل الحفظ في الشيت، نفتح الواتساب كي لا تخسر العميل
-            window.open(`https://wa.me/967775226109`, '_blank');
-            submitBtn.innerText = originalBtnText;
-            submitBtn.disabled = false;
-        });
-    }
-
-    // إغلاق النافذة عند الضغط خارجها
-    window.onclick = function(event) {
-        if (event.target == document.getElementById('orderModal')) {
-            closeModal();
-        }
-    }
-</script>
-
+            <div class="copyright-bar">
+                &copy; 2025 متجر متجر لوكس سويس لأفخم الساعات. جميع الحقوق محفوظة. | تصميم بواسطة: <span
+                    class="developer-name"> <a href="" style="text-decoration: none;">Amjed.Dev</a></span>
+            </div>
+        </div>
+    </footer>
+    <script src="assets/js/script.js"></script>
 </body>
+
 </html>
