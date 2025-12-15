@@ -1,7 +1,7 @@
 // ==========================================
 // 1. إعدادات المتجر
 // ==========================================
-const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzzrMycvpgFCh6DwqGXsBsLXtb6_FmDqv9JV31uSPWBLn_sjmqDJ1FBIXKhdhG_o0LA/exec";
+const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbz8W8-0T6VPs7zxJ-fdOmaOHR8WlGUAVDR-1aS5JD7ypZnYm1e8OcjcfOapWScBix5Q/exec";
 const WHATSAPP_NUMBER = "967772983550";
 const DELIVERY_COST = 1000;
 const CURRENCY = "ريال";
@@ -90,9 +90,9 @@ products.forEach((product) => {
     grid.innerHTML += card;
 });
 
-// ... (باقي كود JS للمودال وإرسال الطلب يبقى كما هو بدون تغيير) ...
+
 // ==========================================
-// 4. منطق النافذة
+// 4. هيكل النافذة
 // ==========================================
 let currentShippingMode = "inside";
 
@@ -110,7 +110,7 @@ function openModal(productId) {
     document.getElementById("h_price").value = product.price;
     document.getElementById("h_imgUrl").value = product.image;
 
-    setShipping("inside"); // Reset to default
+    setShipping("inside"); // Reset 
     document.getElementById("orderModal").style.display = "flex";
 }
 
@@ -173,7 +173,7 @@ function submitOrder(e) {
     btn.disabled = true;
 
     const formData = {
-        date: new Date().toLocaleDateString("en-"),
+        date: new Date().toLocaleDateString("en"),
         orderId: Math.floor(Math.random() * 10000),
         name: document.getElementById("name").value,
         phone: document.getElementById("phone").value,
@@ -185,7 +185,7 @@ function submitOrder(e) {
         price: document.getElementById("h_price").value,
         imgUrl: document.getElementById("h_imgUrl").value,
         shippingFee: currentShippingMode === "inside" ? DELIVERY_COST : "يحدد لاحقاً",
-        total: document.getElementById("summaryTotal").innerText,
+        total: document.getElementById("summaryTotal").innerText + CURRENCY,
     };
 
     fetch(GOOGLE_SCRIPT_URL, {
@@ -212,7 +212,7 @@ function submitOrder(e) {
             if (currentShippingMode === "inside") {
                 msg +=
                     `*التوصيل:* ${DELIVERY_COST} ${CURRENCY}%0a` +
-                    `*الإجمالي:* ${formData.total} ${CURRENCY} (عند الاستلام)`;
+                    `*الإجمالي:* ${formData.total} (عند الاستلام)`;// ${CURRENCY}
             } else {
                 msg += `⚠️ *الطلب خارج صنعاء، يرجى التنسيق للدفع والشحن.*`;
             }
