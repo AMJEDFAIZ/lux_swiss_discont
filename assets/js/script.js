@@ -1,7 +1,7 @@
 // ==========================================
 // 1. إعدادات المتجر
 // ==========================================
-const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbz8W8-0T6VPs7zxJ-fdOmaOHR8WlGUAVDR-1aS5JD7ypZnYm1e8OcjcfOapWScBix5Q/exec";
+const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxdE1nQdYaPRUowMWxmArVbtTfMIjcGRrdVsctiIPy26KnrZchXZV1lfuVQJ9Jzw3Q/exec";
 const WHATSAPP_NUMBER = "967772983550";
 const DELIVERY_COST = 1000;
 const CURRENCY = "ريال";
